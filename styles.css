@@ -34,6 +34,7 @@ h2 {
   opacity: 0;
   transition: all 1s ease;
   filter: blur(5x);
+  transition-delay: 0.2s;
 }
 
 .show {
@@ -60,17 +61,57 @@ h2 {
   transform: translateY(0);
 }
 
-.postcard img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 30px;
-  filter: brightness(70%) contrast(70%) drop-shadow(4px 4px var(--black-2));
-}
-
 .postcard p {
   color: var(--white);
   text-align: center;
   font-size: 32px;
+}
+
+.card {
+  position: relative;
+  width: 350px; /* Фиксированная ширина карточки */
+  height: 350px; /* Фиксированная высота карточки */
+  perspective: 1000px; /* Добавляет эффект глубины для переворота */
+  margin: 0 auto;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d; /* Сохраняет 3D-эффект для содержимого */
+}
+
+.card:hover .card-inner {
+  transform: rotateY(180deg); /* Поворот при наведении */
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Скрывает обратную сторону при повороте */
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.card-front img,
+.card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Фиксирует размер изображения */
+  border-radius: 30px;
+  filter: brightness(70%) contrast(70%) drop-shadow(4px 4px var(--black-2));
+}
+
+.card-back {
+  transform: rotateY(180deg); /* Задняя сторона повёрнута на 180 градусов */
+}
+
+#target_img {
+  transition: opacity 0.5s ease;
 }
 
 .snowblock {

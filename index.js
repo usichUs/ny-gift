@@ -12,15 +12,18 @@ const observer = new IntersectionObserver((entries) => {
 const hiddenElements = document.querySelectorAll(".hidden");
 hiddenElements.forEach((el) => observer.observe(el));
 
-const target_img = document.getElementById("target_img");
 const target_text = document.getElementById("text");
 const target_title = document.getElementById("title");
-const boys_btn = document.getElementById("target_img");
-boys_btn.addEventListener("click", () => {
-  setTimeout(() => {
-    target_img.src = "gift.jpeg";
-    target_text.innerText = "";
-    target_title.innerText = "Твой подарок в пути, кстати вот он";
-    target_title.style.fontSize = "32px";
-  }, 500);
+
+const card = document.querySelector(".card");
+
+card.addEventListener("click", () => {
+  const inner = card.querySelector(".card-inner");
+  inner.style.transform =
+    inner.style.transform === "rotateY(180deg)"
+      ? "rotateY(0deg)"
+      : "rotateY(180deg)";
+  target_text.innerText = "";
+  target_title.style.fontSize = "41px";
+  target_title.innerText = "Твой подарок в пути, кстати вот он";
 });
